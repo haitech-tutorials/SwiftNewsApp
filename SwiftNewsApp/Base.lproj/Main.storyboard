@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="R03-X9-UQZ">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.47"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="PMR-4u-LFV">
+            <objects>
+                <tableViewController id="R03-X9-UQZ" customClass="ViewController" customModule="SwiftNewsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="rFh-lk-L77">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="videoCell" rowHeight="360" id="XTj-0s-lR9" customClass="PlaylistItemCell" customModule="SwiftNewsApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="360"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XTj-0s-lR9" id="y4r-A7-GvL">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="359.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swiftnews_50" translatesAutoresizingMaskIntoConstraints="NO" id="npd-w8-NId">
+                                            <rect key="frame" x="16" y="12" width="382" height="286.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="npd-w8-NId" secondAttribute="height" multiplier="4:3" id="fQk-kh-1g4"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Id0-02-hOq">
+                                            <rect key="frame" x="16" y="334.5" width="382" height="17"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="17" id="0Tu-jl-Dgm"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lets just type in some text that should be approximately 2 lines" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjk-pu-ZQO">
+                                            <rect key="frame" x="16" y="310.5" width="382" height="16"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="Id0-02-hOq" secondAttribute="bottom" constant="8" id="2d3-c4-rb1"/>
+                                        <constraint firstItem="npd-w8-NId" firstAttribute="leading" secondItem="y4r-A7-GvL" secondAttribute="leading" constant="16" id="J3L-xw-NUo"/>
+                                        <constraint firstItem="hjk-pu-ZQO" firstAttribute="leading" secondItem="y4r-A7-GvL" secondAttribute="leading" constant="16" id="L7I-ie-P0J"/>
+                                        <constraint firstItem="Id0-02-hOq" firstAttribute="top" secondItem="hjk-pu-ZQO" secondAttribute="bottom" constant="8" id="MiI-Da-E72"/>
+                                        <constraint firstAttribute="trailing" secondItem="hjk-pu-ZQO" secondAttribute="trailing" constant="16" id="Vds-Uw-l7f"/>
+                                        <constraint firstItem="Id0-02-hOq" firstAttribute="leading" secondItem="y4r-A7-GvL" secondAttribute="leading" constant="16" id="YN9-nc-HX7"/>
+                                        <constraint firstItem="hjk-pu-ZQO" firstAttribute="top" secondItem="npd-w8-NId" secondAttribute="bottom" constant="12" id="mGM-lu-XAJ"/>
+                                        <constraint firstItem="npd-w8-NId" firstAttribute="top" secondItem="y4r-A7-GvL" secondAttribute="top" constant="12" id="nib-h4-GzO"/>
+                                        <constraint firstAttribute="trailing" secondItem="Id0-02-hOq" secondAttribute="trailing" constant="16" id="ugf-ed-Fw0"/>
+                                        <constraint firstAttribute="trailing" secondItem="npd-w8-NId" secondAttribute="trailing" constant="16" id="ylK-Bf-SzW"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="itemImageView" destination="npd-w8-NId" id="sKg-s3-6uV"/>
+                                    <outlet property="itemTimestampLabel" destination="Id0-02-hOq" id="8AZ-fX-btD"/>
+                                    <outlet property="itemTitleLabel" destination="hjk-pu-ZQO" id="BTy-bb-hnc"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="R03-X9-UQZ" id="5Hw-dT-KUn"/>
+                            <outlet property="delegate" destination="R03-X9-UQZ" id="DwH-kf-Jbp"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ewb-6H-xyQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-172" y="-97"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="swiftnews_50" width="640" height="480"/>
+    </resources>
+</document>
