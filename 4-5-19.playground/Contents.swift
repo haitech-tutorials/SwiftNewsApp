@@ -6,28 +6,77 @@ struct ServerResponse: Decodable {
 
 struct PlaylistItem: Decodable {
     let id: String
-    let snippet: Snippet
-}
-
-struct Snippet: Decodable {
     let title: String
     let description: String
-    let thumbnails: Thumbnails
-    let publishedAt: String
-    let resourceId: ResourceId
-}
-
-struct Thumbnails: Decodable {
-    let standard: Standard
-}
-
-struct Standard: Decodable {
-    let url: URL
-}
-
-struct ResourceId: Decodable {
+    let imageURL: URL
+    let publishedDate: String
     let videoId: String
+    
+    private enum ItemCodingKeys: String, CodingKey {
+        case id
+        case snippet
+    }
+    
+    private enum SnippetCodingKeys: String, CodingKey {
+        case title
+        case description
+        case thumbnails
+        case publishedDate = "publishedAt"
+        case resourceId
+    }
+    
+    private enum ThumbnailsCodingKeys: String, CodingKey {
+        case standard
+    }
+    
+    private enum StandardCodingKeys: String, CodingKey {
+        case imageURL = "url"
+    }
+    
+    private enum ResourceIdCodingKeys: String, CodingKey {
+        case videoId
+    }
+    
+    init(from decoder: Decoder) throws {
+        
+        let container = try decoder.container(keyedBy: ItemCodingKeys.self)
+        self.id = try container.decode(String.self, forKey: .id)
+        
+        let snippetContainer = try container.nestedContainer(keyedBy: SnippetCodingKeys.self, forKey: .snippet)
+        self.title = try snippetContainer.decode(String.self, forKey: .title)
+        self.description = try snippetContainer.decode(String.self, forKey: .description)
+        self.publishedDate = try snippetContainer.decode(String.self, forKey: .publishedDate)
+        
+        let thumbnailsContainer = try snippetContainer.nestedContainer(keyedBy: ThumbnailsCodingKeys.self, forKey: .thumbnails)
+        
+        let standardContainer = try thumbnailsContainer.nestedContainer(keyedBy: StandardCodingKeys.self, forKey: .standard)
+        self.imageURL = try standardContainer.decode(URL.self, forKey: .imageURL)
+        
+        let resourceContainer = try snippetContainer.nestedContainer(keyedBy: ResourceIdCodingKeys.self, forKey: .resourceId)
+        self.videoId = try resourceContainer.decode(String.self, forKey: .videoId)
+    }
 }
+
+
+//struct Snippet: Decodable {
+//    let title: String
+//    let description: String
+//    let thumbnails: Thumbnails
+//    let publishedAt: String
+//    let resourceId: ResourceId
+//}
+//
+//struct Thumbnails: Decodable {
+//    let standard: Standard
+//}
+//
+//struct Standard: Decodable {
+//    let url: URL
+//}
+//
+//struct ResourceId: Decodable {
+//    let videoId: String
+//}
 
 func downloadVideos() {
     
@@ -51,7 +100,7 @@ func downloadVideos() {
             response.items.forEach { item in
 //                print(item.snippet.title)
 //                print(item.snippet.publishedAt)
-                print(item.snippet.thumbnails.standard.url)
+                print(item.publishedDate)
             }
         } catch {
             print(error.localizedDescription)
