@@ -7,18 +7,56 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ViewController: UITableViewController {
+    
+    var playlistItems = [PlaylistItem]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.estimatedRowHeight = 380
         tableView.rowHeight = UITableView.automaticDimension
+        
+        downloadVideos()
+    }
+    
+    func downloadVideos() {
+        
+        let url = URL(string: "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PL8seg1JPkqgH-ZuXSBBXRGRlnmVtEud04&maxResults=50&key=AIzaSyAdiBfryuUjT_RDycWu5eduPw_w6SZDIQ0")!
+        
+        let request = URLRequest(url: url)
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            if error != nil {
+                print(error?.localizedDescription ?? "")
+            }
+            
+            guard let data = data else { return }
+            
+            do {
+                
+                let decoder = JSONDecoder()
+                let response = try decoder.decode(ServerResponse.self, from: data)
+                DispatchQueue.main.async {
+                    response.items.forEach { item in
+                        self.playlistItems.append(item)
+                    }
+                    self.tableView.reloadData()
+                }
+                
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        
+        task.resume()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return playlistItems.count
     }
     
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -31,9 +69,10 @@ class ViewController: UITableViewController {
             fatalError("Could not dequeue PlaylistItemCell")
         }
         
-        cell.itemTitleLabel.text = "Testing 12345"
-        cell.itemTimestampLabel.text = "29 hours ago"
-        
+        let item = playlistItems[indexPath.row]
+        cell.itemTitleLabel.text = item.title
+        cell.itemTimestampLabel.text = item.publishedDate
+        cell.itemImageView.sd_setImage(with: item.imageURL, completed: nil)
         return cell
     }
 
